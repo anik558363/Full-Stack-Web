@@ -1,0 +1,127 @@
+.fonts h1 {
+    font-family: sans-serif, 'Courier New', Courier, monospace;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+.fonts p {
+    font-family: sans-serif, 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.fonts p span {
+    font-family: sans-serif, 'Courier New', Courier, monospace;
+    font-size: 50px;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+/* 
+
+percentage/rem/em/px/number
+
+*/
+
+
+.lingHight p {
+    line-height: 1.5rem;
+}
+
+
+.outerBox {
+    border: 1px solid black;
+}
+
+
+.outerBox .box {
+    border: 1px solid red;
+    margin: 10px;
+    padding: 10px;
+}
+
+.filter img {
+    /* filter: brightness(80%); */
+    /* filter: blur(50px); */
+    /* filter: contrast(80%); */
+    /* filter: sepia(50%); */
+    filter: grayscale(50%);
+    width: 400px;
+    height: 400px;
+
+}
+
+
+.overflow {
+    width: 400px;
+    height: 400px;
+    border: 1px solid red;
+    /* overflow: hidden; */
+    /* overflow: scroll; */
+    overflow: auto;
+}
+
+
+.relativPosition {
+    height: 300px;
+    width: 600px;
+    background: green;
+    position: relative;
+}
+
+.absolutePosition {
+    height: 150px;
+    width: 150px;
+    background: red;
+    position: absolute;
+    top: 20%;
+    left: 36%;
+    border-radius: 50%;
+}
+
+
+.fixPosition{
+    height: 200px;
+    width: 300px;
+    border: 1px solid red;
+    margin-bottom: 20px !important;
+    margin: auto;
+    padding-left: 20px;
+    position: fixed;
+    bottom: 50%;
+    left: 50%;
+    background: rebeccapurple;
+    color: white;
+}
+
+
+.stickyPosition{
+    height: 200px;
+    width: 300px;
+    border: 1px solid red;
+    margin-bottom: 20px !important;
+    margin: auto;
+    padding-left: 20px;
+    position: sticky;
+    top: 2%;
+    left: 50%;
+    background: rgb(130, 123, 136);
+    color: white;
+    z-index: 111111;
+}
+
+
+.wordWarp{
+    width: 300px;
+    height: 700px;
+    border: 1px solid red;
+    /* word-wrap: break-word; */
+}
+
+.textDecor a{
+    text-decoration: line-through;
+}

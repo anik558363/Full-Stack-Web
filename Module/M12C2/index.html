@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- click -->
+    <!-- <button onclick="onclickAlert()">Click</button> -->
+    <!-- <button id="clickBtn">Click</button> -->
+
+
+    <!-- mouseover -->
+    <!-- <button onmouseover="mouseoverAlert()">Hover Over Me</button> -->
+    <!-- <button id="mouseoverAlert">Hover Over Me</button> -->
+
+
+
+    <!-- keydown -->
+    <!-- keyup -->
+    <!-- <input type="text" id="input"> -->
+
+    <!-- load -->
+    <!-- submit -->
+    <!-- 
+    <br>
+    <br>
+
+    <form id="submitForm">
+        <input type="text" name="username">
+        <button >submit</button>
+    </form> -->
+
+    <!-- scroll -->
+
+    <!-- <div style="height: 2000px;"></div> -->
+
+
+    <!-- dom manipulation id selector -->
+
+    <!-- <h1 id="headingId">This is ID heading</h1>
+
+
+    <button onclick="changeHeading()">Change Text</button> -->
+
+
+    <!-- dom manipulation class selector -->
+
+    <!-- <h1 class="headingClass">This heading one containing class selector</h1>
+    <h1 class="headingClass">This heading two containing class selector</h1> -->
+
+
+    <!-- dom manipulation tag selector -->
+
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
+
+    <button onclick="changeContent(-4)">Change Text Content</button>
+
+
+
+    <script>
+
+        // let clickBtn = document.getElementById("clickBtn");
+
+        // ------- onclickAlert ---------
+
+        // function onclickAlert(){
+        //     alert("button Clicked");
+        // }
+
+        //  clickBtn.addEventListener('click', function () {
+        //     alert("button Clicked");
+        // });
+
+
+        // ------- mouseoverAlert ---------
+
+        // let mouseoverAlert = document.getElementById("mouseoverAlert");
+
+        // mouseoverAlert.addEventListener('mouseover', function () {
+        //     alert("Button Hovered");
+        // });
+
+
+        // function mouseoverAlert() {
+        //     alert("Button Mouseover");
+        // }
+
+
+        // -------keydown-----------
+
+        // let input = document.getElementById("input");
+
+
+
+
+        // input.addEventListener("keydown", function(event){
+        //     console.log("key pressed", event.key);
+        // })
+
+
+        // -------keyup-----------
+        // input.addEventListener("keyup", function (event) {
+        //     console.log("key pressed", event.key);
+        // })
+
+
+        // -------load-----------
+        // window.addEventListener('load', function(){
+        //     console.log("page full loaded");
+
+        // })
+
+
+        // -------submit-----------
+
+        //  let submit = document.getElementById("submitForm");
+
+        //  submit.addEventListener("submit", function(event){
+        //     event.preventDefault();
+        //     alert("form submit");
+        //  });
+
+
+        // -------scroll-----------
+
+        //  window.addEventListener('scroll', function(event){
+        //     console.log("scroll....");
+
+        //  })
+
+        // -------- dom manipulation by id selector ---------
+
+        // let headingId = document.getElementById("headingId");
+
+        // headingId.innerText = "welcome to dom";
+
+        // function changeHeading() {
+        //     headingId.innerText = "welcome to dom";
+        //     headingId.style.color = 'red';
+        //     headingId.style.background = 'green';
+
+        // }
+
+
+        // -------- dom manipulation by class selector ---------
+
+
+        let headingClass = document.getElementsByClassName("headingClass");
+
+        // console.log(headingClass);
+
+        for (const item of headingClass) {
+
+            item.innerText = "test";
+            item.style.color = 'red';
+            item.style.background = 'green';
+
+        }
+
+
+        // -------- dom manipulation by tag selector ---------
+
+        let allTags = document.getElementsByTagName("p");
+
+        //    for (const item of allTags) {
+
+        //         item.innerText = "test";
+        //         item.style.color = 'red';
+        //         item.style.background = 'green';
+
+        //     }
+
+        function changeContent(index) {
+
+            if (index > allTags.length) {
+                alert("element index is graterthean index");
+            } else if (index < allTags.length) {
+                alert("element index is leathern index");
+            } else {
+                allTags[index].innerText = "test";
+            }
+
+
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

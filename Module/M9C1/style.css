@@ -1,0 +1,107 @@
+/* syntax 
+
+ selector {
+    property : value;
+} 
+    
+tag ---> h1, p, div, a, section....
+id ---> #id
+class ---> .class
+
+
+---- universal -----
+
+*{
+
+}
+
+
+-------- attribute selector --------
+
+input[type="email"]{
+    border: 1px solid black;
+    color: aqua;
+}
+    
+
+----------- grouping --------
+
+h1, p, input{
+
+}
+
+------------- combination --------------
+.nav a {
+}
+
+
+.list>li {
+
+    border: 1px solid red;
+
+}
+
+
+h1 + p{
+    border: 1px solid red;
+}
+
+
+------------- sudo -----------
+
+
+.nav a{
+    color: green;
+}
+
+.nav a:hover{
+    color: red;
+}
+
+
+---------- background style --------
+
+.hero{
+   background-image: url('./hero.avif');
+    color: white;
+    background-size: cover;
+   background-size: contain;
+   background-size: 400px 200px;
+   background-size: 30% 40%;
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+
+
+border properties ----------
+
+.box{
+    border: 1px solid black;
+}
+
+.border-edge{
+    border-top-right-radius: 30px;
+     border-bottom-left-radius: 30px;
+}
+
+
+---------- display -------
+
+.display{
+   visibility: hidden; 
+    display: none;
+}
+
+
+------ cursor --------
+
+.display{
+    cursor: copy;
+    cursor: move;
+}
+
+
+*/

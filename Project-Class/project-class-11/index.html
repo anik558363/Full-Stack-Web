@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Open Console to see Output</h1>
+
+
+    <script>
+
+        let students = [];
+        let IdCounter = 1;
+
+        //  Add Student 
+
+        function addStudent(name, mark) {
+
+            if (typeof name !== "string" || name.trim() === "") {
+                console.log("Invalid Name! Please enter a valid student name.");
+                return null;
+            }
+
+            if (typeof mark !== "number" || mark < 0 || mark > 100) {
+                console.log("Invalid Marks! Please enter marks between 0 and 100.");
+                return null;
+            }
+
+
+            let grade;
+            if (mark >= 80) grade = 'A+';
+            else if (mark >= 70) grade = 'A';
+            else if (mark >= 60) grade = 'B';
+            else if (mark >= 50) grade = 'C';
+            else grade = 'Fail';
+
+
+            const student = {
+                id: IdCounter++,
+                name: name.trim(),
+                mark: mark,
+                grade: grade
+            };
+
+            students.push(student);
+            return student;
+        }
+
+
+        // do while loop -- show welcome message
+
+        function showMessage() {
+
+            do {
+                console.log("Welcome to Student Grande Management System");
+                printed = true;
+            } while (!printed);
+
+        }
+
+
+        // for loop -- show all students
+
+        function showStudents() {
+
+            console.log("-----  Student List ------");
+
+            for (let i = 0; i < students.length; i++) {
+                console.log(`${students[i].id} - Name: ${students[i].name} - Mark: ${students[i].mark} - Grade: ${students[i].grade}`
+                );
+
+            }
+
+        }
+
+
+        // Show Passed Students 
+
+        function showPassedStudents() {
+            let passed = students.filter(s => s.grade !== "Fail");
+            console.log("----- Passed Students -----");
+
+            if (passed.length === 0) {
+                console.log("No students have passed.");
+            } else {
+                passed.forEach(s => {
+                    console.log(`${s.id} - Name: ${s.name} - Mark: ${s.mark} - Grade: ${s.grade}`);
+                });
+            }
+        }
+
+
+
+
+        // find single student by id
+        function findStudent(id) {
+
+            let result;
+
+            switch (true) {
+                case students.length === 0:
+                    result = "No students Found";
+                    break;
+
+                default:
+                    result = students.find(s => s.id === id) || "Student Not Found";
+                    break;
+            }
+
+            return result;
+
+        }
+
+
+
+        // delete student 
+
+        let deletedStudent = function (id) {
+
+            let index = students.findIndex(s => s.id === id);
+
+            if (index !== -1) {
+                students.splice(index, 1);
+                return "Student Deleted Successfully";
+            } else {
+                return "Student Not Found";
+            }
+
+        }
+
+
+        // total marks
+
+        function totalMarks() {
+
+            let i = 0;
+            let total = 0;
+
+            while (i < students.length) {
+                total += students[i].mark;
+                i++;
+            }
+
+            return total;
+        }
+
+
+        // average marks
+
+        let averageMarks = () => {
+
+            if (students.length === 0) {
+                return 0;
+            } else {
+                return totalMarks() / students.length;
+            }
+
+        }
+
+
+        // show single student details
+        function showStudentDetails(student) {
+
+            console.log("----- Student Details -----");
+
+            for (const key in student) {
+                console.log(`${key}: ${student[key]}`);
+            }
+
+        }
+
+        // First Position Student
+
+        function firstPositionStudent() {
+            if (students.length === 0) return "No students Found";
+            let topper = students.reduce((max, s) => s.mark > max.mark ? s : max);
+            console.log("----- First Position Student -----");
+            for (const key in topper) {
+                console.log(`${key}: ${topper[key]}`);
+            }
+        }
+
+        // Function Calls
+
+        showMessage();
+
+        addStudent("Alice", 85);
+        addStudent("Bob", 99);
+        addStudent("Charlie", 48);
+
+        showStudents();
+
+
+        showPassedStudents();
+
+        let student = findStudent(2);
+        if (typeof student === "object") {
+            showStudentDetails(student);
+        } else {
+            console.log(student);
+        }
+
+
+        console.log(deletedStudent(3));
+        showStudents();
+        console.log("Total Marks: " + totalMarks());
+        console.log("Average Marks: " + averageMarks().toFixed(2));
+
+        firstPositionStudent();
+
+    </script>
+</body>
+
+</html>
