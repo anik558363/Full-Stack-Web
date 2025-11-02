@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>K-Drama Directory</title>
+    <style>
+        /* ---------------- Body & Layout ---------------- */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0 20px 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-top: 40px;
+            font-size: 2.4rem;
+        }
+
+        .count {
+            text-align: center;
+            margin: 10px 0 30px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        #drama-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        /* ---------------- Card Styles ---------------- */
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #ff4081;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .card p strong {
+            color: #333;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 500px) {
+            #drama-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1> K-Drama Directory</h1>
+    <div class="count">
+        Total Dramas: <span id="total-count">0</span>
+    </div>
+
+    <!-- Drama List Container -->
+    <div id="drama-list"></div>
+
+    <script>
+        // ---------------- K-Drama Data ----------------
+        const kdramas = [
+            { title: "Crash Landing on You", year: 2019, genre: "Romance", rating: 9.0, episodes: 16 },
+            { title: "Goblin", year: 2016, genre: "Fantasy", rating: 8.9, episodes: 16 },
+            { title: "Itaewon Class", year: 2020, genre: "Drama", rating: 8.8, episodes: 16 },
+            { title: "Vincenzo", year: 2021, genre: "Action", rating: 8.9, episodes: 20 },
+            { title: "King the Land", year: 2023, genre: "Rom-Com", rating: 8.4, episodes: 16 }
+        ];
+
+        const emojis = ["🌸", "🔥", "💖", "🌙", "⭐", "⚡", "🎬", "🍿"];
+
+        const dramaList = document.getElementById("drama-list");
+
+        // ---------------- Create Drama Cards ----------------
+        kdramas.forEach(drama => {
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            const card = document.createElement("div");
+            card.classList.add("card");
+
+            card.innerHTML = `
+        <h3>${randomEmoji} ${drama.title}</h3>
+        <p><strong>Year:</strong> ${drama.year}</p>
+        <p><strong>Genre:</strong> ${drama.genre}</p>
+        <p><strong>Rating:</strong> ⭐ ${drama.rating}</p>
+        <p><strong>Episodes:</strong> ${drama.episodes}</p>
+      `;
+
+            dramaList.appendChild(card);
+        });
+
+        // ---------------- Show Total Count ----------------
+        document.getElementById("total-count").textContent = kdramas.length;
+    </script>
+</body>
+
+</html>
