@@ -59,6 +59,18 @@ public function returnFile(){
 }
 
 
+// public function downloadFile() {
+
+
+//     return respponse::download(public_path('log.jpg'));
+
+// }
+
+
+public function downloadFile() {
+    return response()->download(public_path('logo.jpg', 'anik.jpg'));
+}
+
 
 
 }

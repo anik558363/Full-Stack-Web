@@ -38,3 +38,4 @@ Route::get('responseTest', [TestController::class, 'responseTest'])->name('respo
 Route::get('redrectToExternalUrl', [TestController::class, 'redrectToExternalUrl']);
 Route::get('redirectToInternalUrl', [TestController::class, 'redirectToInternalUrl']);
 Route::get('returnFile', [TestController::class, 'returnFile']);
+Route::get('downloadFile', [TestController::class, 'downloadFile']);
