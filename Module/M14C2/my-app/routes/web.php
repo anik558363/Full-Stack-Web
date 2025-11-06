@@ -39,3 +39,24 @@ Route::get('redrectToExternalUrl', [TestController::class, 'redrectToExternalUrl
 Route::get('redirectToInternalUrl', [TestController::class, 'redirectToInternalUrl']);
 Route::get('returnFile', [TestController::class, 'returnFile']);
 Route::get('downloadFile', [TestController::class, 'downloadFile']);
+
+
+// Cookie
+Route::get('setCookie', [TestController::class, 'setCookie']);
+Route::get('getCookie', [TestController::class, 'getCookie']);
+Route::get('deleteCookie', [TestController::class, 'deleteCookie']);
+
+
+// Session
+Route::get('setSession', [TestController::class, 'setSession']);
+Route::get('getSession', [TestController::class, 'getSession']);
+Route::get('deletedSession', [TestController::class, 'deletedSession']);
+Route::get('flushSession', [TestController::class, 'flushSession']);
+
+
+// Custom Header
+Route::get('withCusomHeader', [TestController::class, 'withCusomHeader']);
+
+
+
+Route::get('idAddress', [TestController::class, 'idAddress']);

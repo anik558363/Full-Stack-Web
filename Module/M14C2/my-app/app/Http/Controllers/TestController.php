@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class TestController extends Controller
 {
@@ -34,7 +36,7 @@ class TestController extends Controller
         'user' => $userData,
         'total' => $total
 
-      ]);
+      ], 201);
 
     }
 
@@ -59,18 +61,86 @@ public function returnFile(){
 }
 
 
-// public function downloadFile() {
-
-
-//     return respponse::download(public_path('log.jpg'));
-
-// }
-
 
 public function downloadFile() {
     return response()->download(public_path('logo.jpg', 'anik.jpg'));
 }
 
+
+
+public function setCookie()
+{
+    return response("Cookie has been set")
+        ->cookie('name', 'anik', 18);
+}
+
+
+ public function getCookie(Request $request)
+    {
+        $myNameFromCookie = $request->cookie('name');
+
+        return response()->json(['cookie' => $myNameFromCookie]);
+    }
+
+
+
+
+public function deleteCookie() {
+
+    return response('Cookie has been deleted')->withoutCookie('name');
+
+}
+
+
+public function setSession() {
+
+    session(['fullName' => "anik mondol"]);
+
+    return response("session has been set");
+
+
+}
+
+
+
+public function getSession()
+{
+    $getSession = session('fullName');
+
+    return response()->json(['session' => $getSession]);
+}
+
+
+
+public function deletedSession()
+{
+    session()->forget('fullName');
+
+    return response()->json(['session' => 'Session deleted successfully']);
+}
+
+
+public function flushSession()
+{
+    session()->flush();
+    return response("session has been flush");
+}
+
+public function withCusomHeader() {
+
+    return response("response with custom header")
+        ->header('X-Custom-Header', 'anik-mondol');
+
+}
+
+
+public function idAddress(Request $request) {
+
+    $idAddress = request()->ip();
+
+    return response()->json(['ip_address' => $idAddress]);
+
+}
 
 
 }
