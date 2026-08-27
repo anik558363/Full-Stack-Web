@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h1>Hellow World</h1>
+    <h1>{{ $name }}</h1>
 
 </body>
 </html>
