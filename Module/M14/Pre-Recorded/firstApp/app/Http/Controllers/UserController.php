@@ -94,7 +94,73 @@ class UserController extends Controller
     // }
 
 
+    // public function homePage()
+    // {
+    //     return view('welcome', ["name" => "anik"]);
+    // }
 
-    
 
+    // public function register(Request $request)
+    // {
+
+
+
+    //     try {
+    //         $validated = $request->validate([
+    //             'name' => 'required|string|max:255',
+    //             'email' => 'required|string|email',
+    //         ]);
+
+    //         return response()->json([
+    //             'message' => 'Registration successful',
+    //             'data' => $validated,
+    //         ]);
+    //     } catch (\Throwable $e) {
+    //         return response()->json([
+    //             'message' => $e->getMessage(),
+    //         ], 500);
+    //     }
+    // }
+
+    // public function register(Request $request)
+    // {
+
+
+
+    //     if ($request->email == 'anik@gmail.com')
+
+
+    //     $frontCookie = $request->cookie('token');
+
+    //     $token = 'secretEncryptedToken';
+    //     $token = json_encode([
+    //         'email' => $request->email,
+    //         'token' => $token,
+    //         'id' => 1
+    //     ]);
+
+    //     return response()->json([
+    //        json_decode($frontCookie)
+    //     ])->withCookie('token', $token, 60, '/', null, false, true);
+    // }
+
+
+    public function register(Request $request)
+    {
+
+
+        if ($request->email == 'anik@gmail.com') {
+
+            $frontCookie = $request->cookie('token');
+
+            $token = 'secretEncryptedToken';
+
+            $token = encrypt("anik is student");
+
+
+            return response()->json([
+                decrypt($frontCookie)
+            ])->withCookie('token', $token, 60, '/', null, false, true);
+        }
+    }
 }

@@ -13,9 +13,12 @@ Route::get('/', function () {
 
 Route::get('/',[UserController::class, 'homePage']);
 
-Route::get('/panda',[UserController::class, 'sayHello']);
+// Route::get('/panda',[UserController::class, 'sayHello']);
 
 
 
-Route::post('/login',[UserController::class, 'login']);
+// Route::post('/login',[UserController::class, 'login']);
+
+
+
 
