@@ -70,12 +70,12 @@ class UserController extends Controller
     //     );
     // }
 
-    // public function homePage()
-    // {
+    public function homePage()
+    {
 
 
-    //     return "Hello World";
-    // }
+        return "Hello World";
+    }
 
 
     // public function sayHello($name){
@@ -167,17 +167,56 @@ class UserController extends Controller
 
 
 
+    // public function register(Request $request)
+    // {
+
+    //     // return $request->ip();
+    //     // return $request->ips();
+
+    //     if ($request->email == 'anik@gmail.com') {
+
+    //         return response([
+    //             'status' => "success"
+
+    //         ])->withCookie('token', 'anikToken', 60, '/', null, false, true);
+    //     }
+    // }
+
+
     public function register(Request $request)
     {
 
-        // return $request->ip();
-        // return $request->ips();
 
-        if ($request->email == 'anik@gmail.com') {
 
-            return response([
-                'status' => "success"
-            ])->withCookie('token', 'anikToken', 60, '/', null, false, true);
-        }
+
+
+        $token = encrypt([
+            'password' => 'anik12345',
+        ]);
+
+        return response()->json([
+            "Register Succesefully",
+        ])->withCookie(
+            'token',
+            $token,
+            60,
+            '/',
+            null,
+            false,
+            true
+        );
     }
+
+
+     public function getProfile(Request $request)
+    {
+
+        return response()->json([
+            'name' => 'anik',
+            'email' => 'anik@gmail.com'
+        ]);
+
+    }
+
+
 }
