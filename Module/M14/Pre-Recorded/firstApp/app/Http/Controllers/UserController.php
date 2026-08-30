@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -208,15 +209,58 @@ class UserController extends Controller
     }
 
 
-     public function getProfile(Request $request)
+    public function getProfile(Request $request)
     {
 
         return response()->json([
             'name' => 'anik',
             'email' => 'anik@gmail.com'
-        ]);
 
+        ]);
     }
 
 
+    public function fileUploade(Request $request)
+    {
+
+
+
+    // $path = 'storage/uploads/1788066744.jpeg';
+
+    // unlink($path);
+
+
+    $path = 'uploads/1788067377.png';
+
+    Storage::disk('public')->delete($path);
+
+
+        if ($request->hasFile('avatar')) {
+
+
+            $file = $request->file('avatar');
+
+            // $file->store('uploads');
+
+
+            $name = time() . '.' . $file->getClientOriginalExtension();
+
+          $path =  $file->storeAs('uploads', $name, 'public');
+
+            return response()->json([
+                $file->getClientOriginalName(),
+                $file->getClientOriginalExtension(),
+                $file->getSize(),
+                $path
+            ]);
+        }
+    }
+
+
+
+    public function throttling(Request $request){
+
+        return "22";
+
+    }
 }
