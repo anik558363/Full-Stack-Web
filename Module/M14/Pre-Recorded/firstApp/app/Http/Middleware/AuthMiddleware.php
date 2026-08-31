@@ -17,17 +17,26 @@ class AuthMiddleware
     {
 
 
+
+
+
         $token = $request->cookie('token');
 
-        $token = decrypt($token);
+       
 
-        if ($token && $token->password == 'anik12345') {
-            return $next($request);
-        }else{
+
+
+        if ($token) {
+
+            $token = decrypt($token);
+
+            if ($token['password'] == 'anik12345') {
+                return $next($request);
+            }
+        } else {
             return response()->json([
                 'message' => 'Unauthorize'
             ], 401);
         }
-
     }
 }
