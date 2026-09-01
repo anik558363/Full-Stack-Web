@@ -17,5 +17,15 @@ Route::get('/response', function(){
 
 
 Route::get('/sumOfNumber', [TestController::class, 'sumOfTwoNumber']);
-Route::get('/responseTest', [TestController::class, 'responseTest']);
+Route::get('/responseTest', [TestController::class, 'responseTest'])->name('response.test');
+Route::get('/redirect', [TestController::class, 'redircetToExternalUrl']);
+Route::get('/redirectInternal', [TestController::class, 'redirectToInternalUrl']);
 
+Route::get('/fileReturn', [TestController::class, 'fileReturn']);
+
+Route::get('/fileReturn', [TestController::class, 'fileReturn']);
+
+Route::get('/pdfFileReturn', [TestController::class, 'pdfFileReturn']);
+
+
+Route::get('/downloadFile', [TestController::class, 'downloadFile']);

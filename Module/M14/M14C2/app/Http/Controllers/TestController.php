@@ -49,9 +49,50 @@ class TestController extends Controller
 
         return response()->json([
             'total' => $total,
-            '$userData' => $userData,
+            'userData' => $userData,
             'Batch' => 'Laravel-09',
             'Teacher' => 'Sobuj'
         ]);
     }
+
+
+    public function redircetToExternalUrl()
+    {
+        return redirect('https://ostad.app/');
+    }
+
+
+    public function redirectToInternalUrl()
+    {
+        return redirect()->route('response.test');
+    }
+
+
+    public function fileReturn()
+    {
+
+
+        return response()->file(public_path('coderixa_favicon.png'));
+    }
+
+     public function pdfFileReturn()
+    {
+
+
+        return response()->file(public_path('img/anik(cv).pdf'));
+    }
+
+  public function downloadFile()
+{
+    $file = public_path('img/anik(cv).pdf');
+
+    if (!file_exists($file)) {
+        abort(404, 'CV file not found.');
+    }
+
+    return response()->download($file, 'anikmondal-cv.pdf', [
+        'Content-Type' => 'application/pdf',
+    ]);
+}
+
 }
