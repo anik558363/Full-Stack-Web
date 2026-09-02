@@ -44,3 +44,6 @@ Route::get('/sessionDelete', [TestController::class, 'sessionDelete']);
 
 Route::get('/sessionFlush', [TestController::class, 'sessionFlush']);
 
+Route::get('/withCustomHeader', [TestController::class, 'withCustomHeader']);
+
+Route::get('/requestIp', [TestController::class, 'requestIp']);

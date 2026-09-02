@@ -52,7 +52,7 @@ class TestController extends Controller
             'userData' => $userData,
             'Batch' => 'Laravel-09',
             'Teacher' => 'Sobuj'
-        ]);
+        ], 201);
     }
 
 
@@ -154,5 +154,15 @@ class TestController extends Controller
         return response('All session values deleted');
     }
 
+
+    public function withCustomHeader(){
+
+        return response('Custom header added')->header('MY-NAME', 'My Custom Value');
+    }
+
+
+    public function requestIp(Request $request){
+        return response('Your IP address is: ' . $request->ip());
+    }
 
 }
