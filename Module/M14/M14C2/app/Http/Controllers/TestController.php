@@ -49,9 +49,120 @@ class TestController extends Controller
 
         return response()->json([
             'total' => $total,
-            '$userData' => $userData,
+            'userData' => $userData,
             'Batch' => 'Laravel-09',
             'Teacher' => 'Sobuj'
+        ], 201);
+    }
+
+
+    public function redircetToExternalUrl()
+    {
+        return redirect('https://ostad.app/');
+    }
+
+
+    public function redirectToInternalUrl()
+    {
+        return redirect()->route('response.test');
+    }
+
+
+    public function fileReturn()
+    {
+
+
+        return response()->file(public_path('coderixa_favicon.png'));
+    }
+
+    public function pdfFileReturn()
+    {
+
+
+        return response()->file(public_path('img/anik(cv).pdf'));
+    }
+
+    public function downloadFile()
+    {
+        $file = public_path('img/anik(cv).pdf');
+
+        if (!file_exists($file)) {
+            abort(404, 'CV file not found.');
+        }
+
+        return response()->download($file, 'anikmondal-cv.pdf', [
+            'Content-Type' => 'application/pdf',
         ]);
     }
+
+
+    public function setcookie()
+    {
+
+
+        return response('cookie has been set')->cookie('name', 'anik mondal', 60);
+    }
+
+
+    public function getcookie(Request $request)
+    {
+
+        $value = $request->cookie('name');
+
+        return response('Cookie value: ' . $value);
+    }
+
+
+    public function deleteCookie()
+    {
+        return response('Cookie deleted')->withoutCookie('name');
+
+    }
+
+
+    public function sessionSet(){
+
+
+    session(['name' => 'anik mondal', 'age' => 25]);
+
+    return response('Session has been set');
+
+    }
+
+
+    public function sessionGet(Request $request){
+
+        $name = $request->session()->get('name');
+        $age = $request->session()->get('age');
+
+        return response("Session values: Name - $name, Age - $age");
+    }
+
+    public function sessionDelete(Request $request){
+
+        $request->session()->forget('name');
+
+
+        return response('Session values deleted');
+    }
+
+
+    public function sessionFlush(Request $request){
+
+        $request->session()->flush();
+
+        return response('All session values deleted');
+    }
+
+
+    public function withCustomHeader(){
+
+        return response('Custom header added')->header('MY-NAME', 'My Custom Value');
+    }
+
+
+    public function requestIp(Request $request){
+        return response('Your IP address is: ' . $request->ip());
+    }
+
 }
