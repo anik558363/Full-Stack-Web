@@ -52,7 +52,7 @@
 
     <section>
 
-        <h1 class="text-center"> Welcome to {{ $pageName ?? 'Default Name'  }} Page </h1>
+        <h1 class="text-center"> Welcome to {{ $pageName }} Page </h1>
 
     </section>
 
