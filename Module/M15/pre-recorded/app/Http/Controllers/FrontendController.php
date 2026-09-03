@@ -13,34 +13,11 @@ class FrontendController extends Controller
         $pageName = 'Home';
         $htmlCode = "<h2>this is h1 tag</h2>";
 
-        $age = 19;
+        $age = 20;
 
 
         $userList = [
-            [
-                'name' => 'John Doe',
-                'email' => 'john@example.com'
-            ],
-            [
-                'name' => 'Jane Smith',
-                'email' => 'jane@example.com'
-            ],
-            [
-                'name' => 'Bob Johnson',
-                'email' => 'bob@example.com'
-            ],
-            [
-                'name' => 'Alice Williams',
-                'email' =>  'alice@example.com'
-            ],
-            [
-                'name' => 'David Brown',
-                'email' =>  'david@example.com'
-            ],
-            [
-                'name' => 'Emily Davis',
-                'email' =>  'emily@example.com'
-            ]
+           
         ];
 
         return view('home', compact('pageName', 'htmlCode', 'age', 'userList'));
