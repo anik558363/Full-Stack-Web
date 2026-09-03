@@ -10,10 +10,8 @@
     <p>This is the content for the about page.</p>
 
 
-        <x-alert />
+    <x-alert />
     <x-alert type='danger' />
     <x-alert type='info' />
 
 @endsection
-
-
