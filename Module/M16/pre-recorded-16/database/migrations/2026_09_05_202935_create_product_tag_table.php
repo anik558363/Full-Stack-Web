@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('profile', function (Blueprint $table) {
-            $table->string('address')->nullable()->after('bio');
+        Schema::create('product_tag', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('tag_id')->constrained();
+
+
+            $table->timestamps();
         });
     }
 
@@ -21,10 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('profile', function (Blueprint $table) {
-            $table->dropColumn([
-                'address',
-            ]);
-        });
+        Schema::dropIfExists('product_tag');
     }
 };
