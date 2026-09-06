@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('profile', function (Blueprint $table) {
-            $table->dropColumn([
-                'address',
-            ]);
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->decimal('total_amount', 10, 2);
+            $table->string('status')->default('pending');
+            $table->timestamps();
         });
     }
 
@@ -23,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('profile', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('orders');
     }
 };
