@@ -20,9 +20,9 @@
                               fast</span></h1>
                       <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
                           <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder"
-                              href="resume.html">Resume</a>
+                              href="{{ route('resume') }}">Resume</a>
                           <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder"
-                              href="projects.html">Projects</a>
+                              href="{{ route('projects') }}">Projects</a>
                       </div>
                   </div>
               </div>
@@ -32,7 +32,7 @@
                       <div class="profile bg-gradient-primary-to-secondary">
                           <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
                           <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                          <img class="profile-img" src="assets/profile.png" alt="..." />
+                          <img class="profile-img" src="{{ asset('assets/profile.png') }}" alt="..." />
                           <div class="dots-1">
                               <!-- SVG Dots-->
                               <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
