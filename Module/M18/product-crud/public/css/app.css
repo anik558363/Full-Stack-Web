@@ -272,13 +272,73 @@ table.ledger tbody tr:hover {
 
 /* Pagination */
 .pagination-wrap {
-    margin-top: 20px;
-    font-size: 14px;
+    margin-top: 24px;
 }
 
-.pagination-wrap nav>div {
+.ledger-pagination {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.pg-list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pg-item a,
+.pg-item span {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: var(--radius);
+    font-size: 13.5px;
+    text-decoration: none;
+    color: var(--ink);
+    border: 1px solid transparent;
+}
+
+.pg-item a:hover {
+    border-color: var(--rule);
+    background: var(--paper-raised);
+}
+
+.pg-item.pg-current span {
+    background: var(--green);
+    color: #fff;
+    font-weight: 600;
+}
+
+.pg-item.pg-disabled span {
+    color: var(--rule);
+    cursor: default;
+}
+
+.pg-item.pg-dots span {
+    border: none;
+    color: var(--ink-soft);
+}
+
+.pg-summary {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+@media (max-width: 560px) {
+    .ledger-pagination {
+        justify-content: center;
+        text-align: center;
+    }
 }
 
 /* Forms */
