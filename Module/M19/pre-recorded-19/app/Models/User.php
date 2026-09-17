@@ -24,6 +24,16 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    public function getLowerCaseNameAttribute(){
+        return strtolower($this->name);
+    }
+
+    public function setNameAttribute($value){
+        $this->attributes['name'] = strtoupper($value);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

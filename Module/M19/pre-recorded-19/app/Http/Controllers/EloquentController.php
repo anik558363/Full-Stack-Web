@@ -68,10 +68,32 @@ class EloquentController extends Controller
         // ]);
 
 
-        $product = Product::find(2);
+        // $product = Product::find(2);
 
-        $product->stock->incment
+        // $product->increment('stock');
+        // $product->decrement('stock', 10);
 
-        return $product;
+        // $order_item =  OrderItem::destroy(1);
+
+        // $user = User::find(2);
+
+        // return $user->name;
+        // return $user->lower_case_name;
+
+
+        $user = new User();
+
+        $user->name = 'Anik Mondal';
+        $user->email = 'ritu1221@gmail.com';
+        $user->password = '12345678';
+
+
+
+        $user->save();
+
+        return $user;
+
+
+
     }
 }
