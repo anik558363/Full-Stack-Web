@@ -7,6 +7,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EloquentController extends Controller
 {
@@ -81,19 +82,24 @@ class EloquentController extends Controller
         // return $user->lower_case_name;
 
 
-        $user = new User();
+        // $user = new User();
 
-        $user->name = 'Anik Mondal';
-        $user->email = 'ritu1221@gmail.com';
-        $user->password = '12345678';
+        // $user->name = 'Anik Mondal';
+        // $user->email = 'ritu1221@gmail.com';
+        // $user->password = '12345678';
 
 
 
-        $user->save();
+        // $user->save();
+
+       $user = User::updateOrCreate(
+            ['email' => 'ritu1221@gmail.com'],
+            [
+                'name' => 'ritu mondal',
+                'password' => Hash::make('12345678'),
+            ]
+        );
 
         return $user;
-
-
-
     }
 }
