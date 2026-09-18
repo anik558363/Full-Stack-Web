@@ -96,6 +96,7 @@ class EloquentController extends Controller
             ['email' => 'ritu1221@gmail.com'],
             [
                 'name' => 'ritu mondal',
+                
                 'password' => Hash::make('12345678'),
             ]
         );
