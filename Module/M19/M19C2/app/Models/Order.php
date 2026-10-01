@@ -7,23 +7,45 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-      use HasFactory;
+    use HasFactory;
 
-     protected $fillable = ['customer_id', 'order_no', 'status', 'sub_total', 'discount', 'tax', 'grand_total'];
+    protected $fillable = ['customer_id', 'order_no', 'status', 'sub_total', 'discount', 'tax', 'grand_total'];
 
 
-     public function customer()
+    public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
-     public function items()
+    public function items()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-     public function payments()
+    public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function scopeBetweenDates($query, ?string $from, ?string $to)
+    {
+        if ($from && $to) {
+            return $query->whereBetween('created_at', [$from, $to]);
+        }
+
+        return $query;
+    }
+
+
+    public function totalPaidAmout(): float
+    {
+        return (float) $this->payments()->sum('amount');
+    }
+
+
+
+    public function duoAmout(): float
+    {
+        return (float) ($this->grand_total - $this->totalPaidAmout());
     }
 }
