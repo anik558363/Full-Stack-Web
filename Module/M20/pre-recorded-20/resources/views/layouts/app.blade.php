@@ -22,16 +22,32 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ Request::routeIs('home') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('home') }}">Home</a>
                     </li>
 
-                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('login') }}">Login</a>
-                    </li>
 
-                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{ route('register') }}">Register</a>
-                    </li>
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+
+                                <button type="submit" class="nav-link border-0 bg-transparent">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('login') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('login') }}">Login</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::routeIs('register') ? 'active' : '' }} " aria-current="page"
+                                href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endif
 
                 </ul>
 
