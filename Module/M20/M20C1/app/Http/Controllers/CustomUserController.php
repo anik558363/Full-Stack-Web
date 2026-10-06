@@ -18,8 +18,6 @@ class CustomUserController extends Controller
     public function loginSubmit(Request $request)
     {
 
-
-
         $email = $request->email;
         $password = $request->password;
 
@@ -38,10 +36,19 @@ class CustomUserController extends Controller
                 'custom_user_email' => $user->email,
             ]);
 
-            return redirect()->route('custom.dashboard'); // Redirect to a dashboard or home page
+            return redirect()->route('custom.dashboard') ->with('success', 'Logged in successfully.');; // Redirect to a dashboard or home page
         } else {
             // Authentication failed
             return redirect()->back()->withErrors(['Invalid credentials']);
         }
+    }
+
+    public function logout(Request $request)
+    {
+
+
+        session()->forget(['custom_user_id', 'custom_user_name', 'custom_user_email']);
+        return redirect()->route('custom.login')
+        ->with('success', 'Logged out successfully.');
     }
 }
