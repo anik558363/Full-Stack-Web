@@ -13,4 +13,4 @@ Route::post('/custom-login/submit', [CustomUserController::class, 'loginSubmit']
 
 Route::get('/custom-dashboard', function () {
     return view('custom_auth.dashboard');
-})->name('custom.dashboard');
+})->name('custom.dashboard')->middleware('custom.auth');

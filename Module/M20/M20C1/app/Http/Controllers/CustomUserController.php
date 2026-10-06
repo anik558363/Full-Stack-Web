@@ -18,7 +18,7 @@ class CustomUserController extends Controller
     public function loginSubmit(Request $request)
     {
 
-      
+
 
         $email = $request->email;
         $password = $request->password;
@@ -28,9 +28,16 @@ class CustomUserController extends Controller
             ->where('is_active', true)
             ->first();
 
+
+
         if ($user) {
-            // Authentication successful
-            // You can set session or perform any other actions here
+
+            session([
+                'custom_user_id' => $user->id,
+                'custom_user_name' => $user->name,
+                'custom_user_email' => $user->email,
+            ]);
+
             return redirect()->route('custom.dashboard'); // Redirect to a dashboard or home page
         } else {
             // Authentication failed
