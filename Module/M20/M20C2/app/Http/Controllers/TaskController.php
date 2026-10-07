@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditTaskRequest;
+use App\Http\Requests\StoreTaskRequest;
 use App\Models\Task;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
     public function index()
     {
-//        $tasks = DB::table('tasks')->orderBy('id','desc')->paginate(5);
-        $tasks = Task::orderBy('id','desc')->paginate(5);
+        $tasks = Task::orderBy('id', 'desc')->paginate(5);
 
-        return view('tasks.index',['tasks'=>$tasks]);
+        return view('tasks.index', ['tasks' => $tasks]);
     }
 
     public function create()
@@ -22,118 +25,113 @@ class TaskController extends Controller
         return view('tasks.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
-        $imagePath = null;
-//        $title = $request->title;
-//        $description = $request->description;
+        // Validated data
+        $validateData = $request->validated();
 
-        if ($request->hasFile('image')){
-            $imagePath = $request->file('image')->store('tasks/test','public');
+
+        try {
+
+
+            $imagePath = null;
+
+            // Upload image
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')
+                    ->store('tasks/test', 'public');
+            }
+
+            // Create task
+            $task = new Task();
+
+            $task->title = $validateData['title'];
+            $task->description = $validateData['description'];
+            $task->image = $imagePath;
+
+            $task->save();
+
+            Log::info('Task Craeted', [
+                'task_id' => $task->id,
+                'title' => $task->title
+            ]);
+
+            return redirect()
+                ->route('tasks.index')
+                ->with('success', 'Task created successfully.');
+        } catch (Exception $e) {
+
+            Log::error('Task Creation Failed', [
+                'error_message' => $e->getMessage(),
+                'time' => $e->getLine()
+            ]);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Something went wrong');
         }
-
-//        DB::table('tasks')->insert([
-//            'title' => $title,
-//            'description' => $description,
-//            'image' => $imagePath,
-//            'created_at' => now(),
-//            'updated_at' => now()
-//        ]);
-
-        /*
-        $task = new Task();
-        $task->title = $title;
-        $task->description = $description;
-        $task->image = $imagePath;
-        $task->save();
-        */
-
-        /*
-        Task::create([
-            'title' => $title,
-            'description' => $description,
-            'image' => $imagePath,
-        ]);
-        */
-
-        $data = $request->all();
-        $data['image'] = $imagePath;
-
-
-        Task::create($data);
-
-        return redirect()->route('tasks.index')->with('success','Task created successfully.');
     }
 
     public function edit($id)
     {
-//        $tasks = DB::table('tasks')->where('id',$id)->first();
-
         $tasks = Task::findOrFail($id);
 
-        return view('tasks.edit',['tasks'=>$tasks]);
+        return view('tasks.edit', ['tasks' => $tasks]);
     }
 
-    public function update(Request $request, $id)
+    public function update(EditTaskRequest $request, $id)
     {
-        $title = $request->title;
-        $description = $request->description;
+        // Get validated data
+        $validateData = $request->validated();
 
-//        $taskOld = DB::table('tasks')->where('id',$id)->first();
+        // Find task
         $taskOld = Task::findOrFail($id);
-        $imagePath =  $taskOld->image;
 
+        // Keep old image
+        $imagePath = $taskOld->image;
 
-        if ($request->hasFile('image')){
-            if ($imagePath && Storage::disk('public')->exists($imagePath)){
-                //Delete old image file if exists
+        // If new image uploaded
+        if ($request->hasFile('image')) {
+
+            // Delete old image
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
                 Storage::disk('public')->delete($imagePath);
             }
-            //Store new image
-            $imagePath = $request->file('image')->store('tasks/test','public');
+
+            // Store new image
+            $imagePath = $request->file('image')
+                ->store('tasks/test', 'public');
         }
 
-//        DB::table('tasks')->where('id',$id)->update([
-//            'title' => $title,
-//            'description' => $description,
-//            'image' => $imagePath,
-//            'updated_at' => now()
-//
-//        ]);
-
-        /*
-        $taskOld->title = $title;
-        $taskOld->description = $description;
-        $taskOld->image = $imagePath;
-        $taskOld->save();
-        */
-
+        // Update task
         $taskOld->update([
-            'title' => $title,
-            'description' => $description,
+            'title' => $validateData['title'],
+            'description' => $validateData['description'],
             'image' => $imagePath,
         ]);
 
-
-        return redirect()->route('tasks.index')->with('success','Task updated successfully.');
+        return redirect()
+            ->route('tasks.index')
+            ->with('success', 'Task updated successfully.');
     }
-
 
     public function destroy($id)
     {
-//        $taskOld = DB::table('tasks')->where('id',$id)->first();
         $taskOld = Task::findOrFail($id);
-        $imagePath =  $taskOld->image;
 
-        if ($imagePath && Storage::disk('public')->exists($imagePath)){
-            //Delete old image file if exists
+        $imagePath = $taskOld->image;
+
+        // Delete image
+        if ($imagePath && Storage::disk('public')->exists($imagePath)) {
             Storage::disk('public')->delete($imagePath);
         }
 
-//        DB::table('tasks')->where('id',$id)->delete();
+        // Delete task
         $taskOld->delete();
 
-        return redirect()->route('tasks.index')->with('success','Task deleted successfully.');
+        return redirect()
+            ->route('tasks.index')
+            ->with('success', 'Task deleted successfully.');
     }
 
     public function test()
@@ -150,10 +148,9 @@ class TaskController extends Controller
     public function testAgain()
     {
         $name = 'Rahim';
+
         echo $name;
 
         $name = 'Sobuj';
-
-
     }
 }
